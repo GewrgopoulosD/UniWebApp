@@ -1,0 +1,627 @@
+@media (max-width: 640px) {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    display: grid;
+    grid-template-rows: 18vh 1fr auto;
+    grid-template-columns: 40vw 20vw 40vw;
+    grid-template-areas:
+      "logo null burger"
+      "Main Main Main"
+      "footer footer footer";
+    justify-items: center;
+    align-items: center;
+  }
+
+  /* HEADER */
+  .Logo {
+    height: 15vh;
+    width: 100%;
+    grid-area: logo;
+  }
+
+  /* LOGO UNIVERSITY ICON */
+  #logoImage {
+    height: 100%;
+  }
+
+  /* BURGER MENU */
+  .hamburger,
+  .hamburgerC {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    width: 100px;
+  }
+
+  .hamburger i,
+  .hamburgerC i {
+    font-size: 3rem;
+  }
+
+  .hamburger {
+    background-color: white;
+    color: black;
+  }
+
+  .hamburgerC {
+    display: none;
+    z-index: 100;
+    background-color: black;
+    color: white;
+  }
+
+  .menu {
+    position: fixed;
+    transform: translateX(200%);
+    transition: transform 0.2s ease-in-out;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    font-size: 30px;
+    row-gap: 0;
+    list-style: none;
+  }
+
+  .showMenu {
+    transform: translateX(0);
+  }
+
+  .menuItem {
+    display: block;
+    margin: 1rem auto;
+    font-size: 1.8rem;
+    color: white;
+    text-decoration: none;
+  }
+
+  .menuItem:hover {
+    text-decoration: underline;
+  }
+
+  #photoMenu {
+    height: 150px;
+  }
+
+  .dashHero {
+    grid-area: Main;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .dashHero {
+    width: 100%;
+  }
+
+  #dashCont {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 1rem;
+    border-radius: 15px;
+    background-color: rgba(218, 187, 112);
+    width: 400px;
+    max-width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #dashCont button {
+    padding: 3%;
+    width: 50%;
+    border-radius: 15px;
+    font-size: 18px;
+  }
+
+  #dashCont button:active {
+    transform: scale(0.9);
+  }
+
+  footer {
+    grid-area: footer;
+    width: 100vw;
+    display: grid;
+    grid-template-rows: 100%;
+    grid-template-columns: 40% 60%;
+    grid-template-areas: "photoF hrefF";
+    border-top: 1px solid black;
+  }
+
+  #footerImg {
+    grid-area: photoF;
+    width: 65%;
+    max-width: 200px;
+    margin-left: 10%;
+  }
+
+  .foot {
+    grid-area: hrefF;
+    align-self: center;
+    justify-self: center;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .foot ul a,
+  .foot ul {
+    list-style: none;
+    color: black;
+    justify-self: center;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 991px) {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    display: grid;
+    grid-template-rows: 18vh 1fr auto;
+    grid-template-columns: 40vw 20vw 40vw;
+    grid-template-areas:
+      "logo null burger"
+      "Main Main Main"
+      "footer footer footer";
+    justify-items: center;
+    align-items: center;
+  }
+
+  /* HEADER */
+  .Logo {
+    height: 15vh;
+    width: 100%;
+    grid-area: logo;
+  }
+
+  /* LOGO UNIVERSITY ICON */
+  #logoImage {
+    height: 100%;
+  }
+
+  /* BURGER MENU */
+  .hamburger,
+  .hamburgerC {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    width: 100px;
+  }
+
+  .hamburger i,
+  .hamburgerC i {
+    font-size: 3rem;
+  }
+
+  .hamburger {
+    background-color: white;
+    color: black;
+  }
+
+  .hamburgerC {
+    display: none;
+    z-index: 100;
+    background-color: black;
+    color: white;
+  }
+
+  .menu {
+    position: fixed;
+    transform: translateX(200%);
+    transition: transform 0.2s ease-in-out;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    font-size: 30px;
+    row-gap: 0;
+    list-style: none;
+  }
+
+  .showMenu {
+    transform: translateX(0);
+  }
+
+  .menuItem {
+    display: block;
+    margin: 1rem auto;
+    font-size: 1.8rem;
+    color: white;
+    text-decoration: none;
+  }
+
+  .menuItem:hover {
+    text-decoration: underline;
+  }
+
+  #photoMenu {
+    height: 150px;
+  }
+
+  .dashHero {
+    grid-area: Main;
+    position: relative;
+    height: 80vh;
+    overflow: hidden;
+  }
+
+  .dashHero img {
+    width: 100%;
+  }
+
+  /* FORM */
+  #dashCont {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2rem;
+    border-radius: 15px;
+    background-color: rgba(218, 187, 112);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #dashCont button {
+    padding: 3%;
+    width: 50%;
+    border-radius: 15px;
+    font-size: 18px;
+  }
+
+  #dashCont button:active {
+    transform: scale(0.9);
+  }
+
+  footer {
+    grid-area: footer;
+    width: 100vw;
+    display: grid;
+    grid-template-rows: 100%;
+    grid-template-columns: 40% 60%;
+    grid-template-areas: "photoF hrefF";
+    border-top: 1px solid black;
+  }
+
+  #footerImg {
+    grid-area: photoF;
+    width: 65%;
+    max-width: 16vw;
+    margin-left: 10%;
+  }
+
+  .foot {
+    grid-area: hrefF;
+    align-self: center;
+    justify-self: center;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .foot ul a,
+  .foot ul {
+    list-style: none;
+    color: black;
+    justify-self: center;
+  }
+}
+@media (min-width: 992px) and (max-width: 1200px) {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    display: grid;
+    grid-template-rows: 23vh 1fr auto;
+    grid-template-columns: 30vw 30vw 40vw;
+    grid-template-areas:
+      "logo nav nav"
+      "Main Main Main"
+      "footer footer footer";
+    justify-items: center;
+    align-items: center;
+    column-gap: 0;
+  }
+
+  /* HEADER */
+  .Logo {
+    grid-area: logo;
+    justify-self: center;
+  }
+
+  /* LOGO UNIVERSITY ICON */
+  #logoImage {
+    max-width: 175px;
+    margin-top: 5%;
+  }
+
+  .hamburger,
+  .hamburgerC,
+  #photoMenu {
+    display: none;
+  }
+
+  nav {
+    grid-area: nav;
+  }
+
+  .menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+  }
+
+  .menuItem {
+    font-size: 28px;
+    text-decoration: none;
+    color: black;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.7s ease;
+    margin-right: 20px;
+  }
+
+  .menuItem:hover {
+    border-bottom-color: black;
+  }
+
+  #photoMenu {
+    max-height: 150px;
+  }
+
+  .dashHero {
+    grid-area: Main;
+    position: relative;
+    height: 80vh;
+    overflow: hidden;
+  }
+
+  .dashHero img {
+    width: 100%;
+  }
+
+  /* FORM */
+  #dashCont {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2rem;
+    border-radius: 15px;
+    background-color: rgba(218, 187, 112);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #dashCont button {
+    padding: 3%;
+    width: 50%;
+    border-radius: 15px;
+    font-size: 18px;
+  }
+
+  #dashCont button:active {
+    transform: scale(0.9);
+  }
+
+  footer {
+    grid-area: footer;
+    width: 100vw;
+    display: grid;
+    grid-template-rows: 100%;
+    grid-template-columns: 20% 80%;
+    grid-template-areas: "photoF hrefF";
+    border-top: 1px solid black;
+  }
+
+  #footerImg {
+    grid-area: photoF;
+    /* width:90%; */
+    max-width: 150px;
+    margin-left: 10%;
+  }
+
+  .foot {
+    grid-area: hrefF;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-self: center;
+    font-size: 25px;
+    text-align: center;
+  }
+
+  .foot ul {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  .foot ul a,
+  .foot ul {
+    list-style: none;
+    color: black;
+    justify-self: center;
+  }
+}
+
+@media (min-width: 1201px) {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    display: grid;
+    grid-template-rows: 23vh 1fr 12%;
+    grid-template-columns: 30vw 30vw 40vw;
+    grid-template-areas:
+      "logo nav nav"
+      "Main Main Main"
+      "footer footer footer";
+    justify-items: center;
+    align-items: center;
+    column-gap: 0;
+  }
+
+  /* HEADER */
+  .Logo {
+    grid-area: logo;
+    justify-self: center;
+  }
+
+  /* LOGO UNIVERSITY ICON */
+  #logoImage {
+    max-width: 175px;
+    margin-top: 5%;
+  }
+
+  .hamburger,
+  .hamburgerC,
+  #photoMenu {
+    display: none;
+  }
+
+  nav {
+    grid-area: nav;
+  }
+
+  .menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+  }
+
+  .menuItem {
+    font-size: 28px;
+    text-decoration: none;
+    color: black;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.7s ease;
+    margin-right: 20px;
+  }
+
+  .menuItem:hover {
+    border-bottom-color: black;
+  }
+
+  #photoMenu {
+    max-height: 150px;
+  }
+
+  .dashHero {
+    grid-area: Main;
+    position: relative;
+    height: 80vh;
+    overflow: hidden;
+  }
+
+  .dashHero img {
+    width: 100%;
+  }
+
+  /* FORM */
+  #dashCont {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2rem;
+    border-radius: 15px;
+    background-color: rgba(218, 187, 112);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #dashCont button {
+    padding: 3%;
+    width: 50%;
+    border-radius: 15px;
+    font-size: 18px;
+  }
+
+  #dashCont button:active {
+    transform: scale(0.9);
+  }
+
+  footer {
+    grid-area: footer;
+    width: 100vw;
+    display: grid;
+    grid-template-rows: 100%;
+    grid-template-columns: 20% 80%;
+    grid-template-areas: "photoF hrefF";
+    border-top: 1px solid black;
+  }
+
+  #footerImg {
+    grid-area: photoF;
+    /* width:90%; */
+    max-width: 150px;
+    margin-left: 10%;
+  }
+
+  .foot {
+    grid-area: hrefF;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-self: center;
+    font-size: 25px;
+    text-align: center;
+  }
+
+  .foot ul {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  .foot ul a,
+  .foot ul {
+    list-style: none;
+    color: black;
+    justify-self: center;
+  }
+}
