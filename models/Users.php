@@ -116,7 +116,7 @@ abstract class Users
                 ':spCode' => $this->spcode
             ]);
             $userId = $pdo->lastInsertId();//we took the id and put it in a variable 
-            
+
             return [
                 'success' => true,
                 'user_id' => $userId,
@@ -155,6 +155,15 @@ abstract class Users
                 'role_id' => $userExists['role_id']
             ];
         }
+    }
+
+
+    public static function findById($userId)//find a user by id 
+    {
+        $pdo = $GLOBALS['pdo'];
+        $select = $pdo->prepare("SELECT * FROM users WHERE user_id = :id");
+        $select->execute([':id' => $userId]);
+        return $select->fetch();
     }
 }
 

@@ -6,28 +6,11 @@ require_once "models/Users.php";
 require_once "models/Students.php";
 require_once "models/Teachers.php";
 
-$userType = null;
-$username = null;
+$userControler = new UserControler(); //create an instance from userControler
+$userData = $userControler->getCurrentUser(); //call the method getCurrrentUser
 
-
-if (isset($_SESSION['user_id'])) { // Check if user is logged in
-    $pdo = $GLOBALS['pdo']; // check the database connection
-    $select = $pdo->prepare("SELECT * FROM users WHERE user_id = :id");
-    $select->execute([':id' => $_SESSION['user_id']]);
-    $userData = $select->fetch();
-
-    if ($userData) {
-        $userType = (int) $userData['role_id'] === 0 ? 'teacher' : 'student';
-        $username = htmlspecialchars($userData['username']);
-
-        if ($userType === 'teacher') {
-            $currentUser = new Teachers($userData['username'], $userData['email'], '', $userData['role_id'], $userData['spCode']);
-        } else {
-            $currentUser = new Students($userData['username'], $userData['email'], '', $userData['role_id'], $userData['spCode']);
-        }
-    }
-
-}
+$userType = $userData ? $userData['userType'] : null;//if find sth keep them on these var to take them in js 
+$username = $userData ? $userData['username'] : null;
 ?>
 <!DOCTYPE html>
 <html lang="en">

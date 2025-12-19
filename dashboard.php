@@ -6,20 +6,21 @@ require_once "models/Users.php";
 require_once "models/Students.php";
 require_once "models/Teachers.php";
 
+if (!isset($_SESSION['user_id'])) {
+  header("Location: index.php");
+  exit();
+}
 
-$controller = new UserControler();
+$userControler = new UserControler();
+$userData = $userControler->getCurrentUser(); //call the method getCurrrentUser
+
+$userType = $userData ? $userData['userType'] : null;//if find sth keep them on these var to take them in js 
+$username = $userData ? $userData['username'] : null;
 
 if (isset($_GET['action']) && $_GET['action'] === 'logout') {
-    $controller->logout();
+  $userControler->logout();
 }
 
-if (!isset($_SESSION['user_id'])) {
-    header("Location: index.php");
-    exit();
-}
-
-$userType = (int) $_SESSION['role_id'] === 0 ? 'teacher' : 'student';//check what kind of user is 
-$username = htmlspecialchars($_SESSION['username']);
 ?>
 
 <!DOCTYPE html>

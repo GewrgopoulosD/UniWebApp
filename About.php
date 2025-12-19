@@ -6,13 +6,11 @@ require_once "models/Users.php";
 require_once "models/Students.php";
 require_once "models/Teachers.php";
 
-$userType = null;//if not logged in user
-$username = null;
+$userControler = new UserControler(); //create an instance from userControler
+$userData = $userControler->getCurrentUser(); //call the method getCurrrentUser
 
-if (isset($_SESSION['user_id'])) {//if there is a logged in user
-    $userType = (int) $_SESSION['role_id'] === 0 ? 'teacher' : 'student';//check what kind of user is 
-    $username = htmlspecialchars($_SESSION['username']);
-}
+$userType = $userData ? $userData['userType'] : null;//if find sth keep them on these var to take them in js 
+$username = $userData ? $userData['username'] : null;
 
 ?>
 <!DOCTYPE html>

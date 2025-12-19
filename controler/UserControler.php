@@ -7,6 +7,33 @@ require_once "./models/Teachers.php";
 
 class UserControler
 { // we make a controler to manage the user's actions
+
+    public function getCurrentUser()
+    {
+        if (!isset($_SESSION['user_id'])) { // if not exist session with user_id
+            return null;
+        }
+
+        $userData = Users::findById($_SESSION['user_id']);//call user method to check for the userID in session
+
+        if (!$userData) {
+            return null;
+        }
+        $userType = (int) $userData['role_id'] === 0 ? 'teacher' : 'student';
+        $username = htmlspecialchars($userData['username']);
+
+        if ($userType === 'teacher') {
+            $currentUser = new Teachers($userData['username'], $userData['email'], '', $userData['role_id'], $userData['spCode']);
+        } else {
+            $currentUser = new Students($userData['username'], $userData['email'], '', $userData['role_id'], $userData['spCode']);
+        }
+
+        return [
+            'userType' => $userType,
+            'username' => $username,
+            'currentUser' => $currentUser
+        ];
+    }
     public function signup()
     {
 

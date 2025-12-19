@@ -6,7 +6,6 @@ require_once "models/Users.php";
 require_once "models/Students.php";
 require_once "models/Teachers.php";
 
-$controller = new UserControler(); // make an object of controller to handle the actions 
 
 if (isset($_SESSION['user_id'])) { // Check if user is already logged in
   header("Location: dashboard.php");
@@ -14,14 +13,15 @@ if (isset($_SESSION['user_id'])) { // Check if user is already logged in
 }
 
 
-$mode = $_POST["mode"] ?? '';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  if ($mode === 'login') {
-    $controller->login();
-  } elseif ($mode === 'signup') {
-    $controller->signup();
-  }
+if ($_SERVER['REQUEST_METHOD'] === 'POST') { //take the data from form and 
+    $controller = new UserControler();// make an object of controller to handle the actions 
+    $mode = $_POST["mode"] ?? '';
+    
+    if ($mode === 'login') { //if the action is login, call the login function from controller 
+        $controller->login();
+    } elseif ($mode === 'signup') { // or signup
+        $controller->signup();
+    }
 }
 
 ?>
