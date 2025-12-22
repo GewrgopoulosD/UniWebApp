@@ -1,4 +1,9 @@
-import { BurgerMenu, updateMenuForLoggedIn } from "./global.js";
+import {
+  BurgerMenu,
+  updateMenuForLoggedIn,
+  createElement,
+  showCourses,
+} from "./global.js";
 BurgerMenu();
 
 let container = document.querySelector("#dashCont");
@@ -15,32 +20,67 @@ if (!userRole || (userRole !== "student" && userRole !== "teacher")) {
 
 function loadDash(userRole) {
   updateMenuForLoggedIn();
-  const fragment = document.createDocumentFragment(); // we make a temporary container
 
-  let header = document.createElement("h2"); //we make an element h2
-  header.textContent =
-    userRole === "student"
-      ? `Welcome student ${username} `
-      : `Welcome Mr. ${username} `;
-  // header.style.textAlign = "center";
+  if (userRole === "teacher") {
+    const fragment = document.createDocumentFragment(); // we make a temporary container
 
-  fragment.append(header); // we put the h2 in the div
+    let header = createElement("h2", `Welcome Mr. ${username} `); //we make an element h2
 
-  let dashComing = document.createElement("h3"); //we make an element h2
-  dashComing.textContent = "Dashboard is coming soon!";
-  // dashComing.style.textAlign = "center";
+    fragment.append(header); // we put the h2 in the div
 
-  fragment.append(dashComing);
+    let divForActions = createElement("div", "", "actionsContainer"); // create a div to contain action buttons
 
-  let btnLogOut = document.createElement("button");
-  btnLogOut.type = "button";
-  btnLogOut.textContent = "Log out";
-  btnLogOut.addEventListener("click", () => {
-    window.location.href = "dashboard.php?action=logout";
-  });
+    let btnCreateCourses = createElement(
+      "button",
+      "Courses",
+      "coursesBtn",
+      async () => {
+        await showCourses(
+          dashboardTable,
+          [btnAssignments, btnStudentSubmissions, btnGrades],
+          btnCreateCourses
+        );
+      }
+    );
 
-  fragment.append(btnLogOut);
+    // create a button to open the table for courses
+    divForActions.append(btnCreateCourses);
 
-  container.append(fragment);
-  console.log("ok"); //TODO: remove it
+    let btnAssignments = createElement(
+      "button",
+      "Assignments",
+      "assignmentsBtn"
+    ); // create a button to open the table for courses
+    divForActions.append(btnAssignments);
+
+    let btnStudentSubmissions = createElement(
+      "button",
+      "Student Submissions",
+      "studentSubmissionsBtn"
+    ); // create a button to open the table for courses
+    divForActions.append(btnStudentSubmissions);
+
+    let btnGrades = createElement("button", "Grades", "gradesBtn"); // create a button to open the table for courses
+    divForActions.append(btnGrades);
+
+    fragment.append(divForActions);
+
+    let dashboardTable = createElement("table", "", "dashboardTable"); //we make a table to show the data
+    dashboardTable.style.display = "none"; // initially make it hidden
+
+    let thead = createElement("thead"); // create thead and tbody so every button that user clicks we will update them dynamically
+    let tbody = createElement("tbody");
+    dashboardTable.append(thead, tbody);
+
+    fragment.append(dashboardTable);
+
+    // let btnLogOut = createElement("button", "Log out", "", () => {
+    //   window.location.href = "dashboard.php?action=logout";
+    // }); // create a button to log out
+
+    // fragment.append(btnLogOut);
+
+    container.append(fragment);
+    console.log("ok"); //TODO: remove it
+  }
 }
