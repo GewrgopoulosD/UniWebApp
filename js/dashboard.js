@@ -4,6 +4,7 @@ import {
   createElement,
   showCourses,
 } from "./global.js";
+
 BurgerMenu();
 
 let container = document.querySelector("#dashCont");
@@ -30,49 +31,40 @@ function loadDash(userRole) {
 
     let divForActions = createElement("div", "", "actionsContainer"); // create a div to contain action buttons
 
-    let btnCreateCourses = createElement(
-      "button",
-      "Courses",
-      "coursesBtn",
-      async () => {
-        await showCourses(
-          dashboardTable,
-          [btnAssignments, btnStudentSubmissions, btnGrades],
-          btnCreateCourses
-        );
-      }
-    );
+    const dashboardDiv = createElement("div", "", "dashboardDiv");
 
-    // create a button to open the table for courses
-    divForActions.append(btnCreateCourses);
+    let btnCreateCourses = createElement("button", "Courses", "coursesBtn"); // create a button to open courses
 
     let btnAssignments = createElement(
       "button",
       "Assignments",
       "assignmentsBtn"
-    ); // create a button to open the table for courses
-    divForActions.append(btnAssignments);
+    ); // create a button to open assignments
 
     let btnStudentSubmissions = createElement(
       "button",
       "Student Submissions",
       "studentSubmissionsBtn"
-    ); // create a button to open the table for courses
-    divForActions.append(btnStudentSubmissions);
+    ); // create a button to open student submissions
 
-    let btnGrades = createElement("button", "Grades", "gradesBtn"); // create a button to open the table for courses
-    divForActions.append(btnGrades);
+    let btnGrades = createElement("button", "Grades", "gradesBtn"); // create a button to open grades
 
-    fragment.append(divForActions);
+    btnCreateCourses.addEventListener("click", async () => {
+      await showCourses(
+        dashboardDiv,
+        [btnAssignments, btnStudentSubmissions, btnGrades],
+        btnCreateCourses
+      );
+    });
 
-    let dashboardTable = createElement("table", "", "dashboardTable"); //we make a table to show the data
-    dashboardTable.style.display = "none"; // initially make it hidden
+    divForActions.append(
+      btnCreateCourses,
+      btnAssignments,
+      btnStudentSubmissions,
+      btnGrades
+    );
 
-    let thead = createElement("thead"); // create thead and tbody so every button that user clicks we will update them dynamically
-    let tbody = createElement("tbody");
-    dashboardTable.append(thead, tbody);
-
-    fragment.append(dashboardTable);
+    fragment.append(divForActions, dashboardDiv);
 
     // let btnLogOut = createElement("button", "Log out", "", () => {
     //   window.location.href = "dashboard.php?action=logout";

@@ -1,3 +1,5 @@
+
+
 @media (max-width: 640px) {
   * {
     margin: 0;
@@ -122,6 +124,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
+    overflow-y: auto;
   }
 
   .actionsContainer {
@@ -145,6 +149,67 @@
 
   .actionsContainer button:active {
     transform: scale(0.9);
+  }
+
+  .dashboardDiv {
+    flex-direction: column;
+    row-gap: 10px;
+    align-items: center;
+  }
+
+  .dashboardHeaderRow {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+    align-items: center;
+  }
+
+  #newContentInput {
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 15px;
+    text-align: center;
+  }
+
+  .dashboardDiv button {
+    font-size: 14px;
+    padding: 8px;
+    min-width: 25px;
+    height: auto;
+    border-radius: 15px;
+  }
+  .dashboardDiv button:active {
+    transform: scale(0.9);
+  }
+
+  .dashboardUlContentInside {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5% auto;
+    row-gap: 10px;
+  }
+
+  .dashboardListItem {
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: 47.5% 47.5%;
+    grid-template-areas:
+      "title title"
+      "btnL btnR";
+    justify-items: center;
+    column-gap: 5%;
+  }
+  .dashboardListItem span {
+    grid-area: title;
+    font-size: 16px;
+    justify-self: center;
+  }
+  .dashboardListItem .edit-btn {
+    grid-area: btnL;
+  }
+  .dashboardListItem .delete-btn {
+    grid-area: btnR;
   }
 
   footer {

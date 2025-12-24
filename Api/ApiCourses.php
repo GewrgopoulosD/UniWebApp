@@ -24,6 +24,29 @@ switch ($action) {
 
         break;
 
+    case 'deleteCourse':
+        $courseId = $_POST['courseId'] ?? null;
+        $success = $courseId && $_SERVER['REQUEST_METHOD'] === 'POST'
+            ? $controller->deleteCourse($courseId)
+            : false;
+        echo json_encode([
+            'success' => (bool) $success,
+            'message' => $success ? 'Course deleted!' : ($courseId ? 'Invalid request method' : 'No course ID provided')
+        ]);
+        break;
+
+    case 'updateCourse':
+        $courseId = $_POST['courseId'] ?? null;
+        $newTitle = $_POST['newTitle'] ?? null;
+        $success = $courseId && $newTitle && $_SERVER['REQUEST_METHOD'] === 'POST'
+            ? $controller->updateCourse($courseId, $newTitle)
+            : false;
+        echo json_encode([
+            'success' => (bool) $success,
+            'message' => $success ? 'Course updated!' : ($courseId ? 'Invalid request method' : 'No course ID provided')
+        ]);
+        break;
+
     default:
         http_response_code(400);
         echo json_encode(["error" => "Invalid action"]);

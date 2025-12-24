@@ -26,4 +26,14 @@ class CourseController
         $professorId = $_SESSION['user_id'];
         return $this->courseModel->addCourse($title, $professorId);
     }
+
+    public function deleteCourse($courseId)
+    {
+        return $this->courseModel->deleteCourse($courseId);
+    }
+
+    public function updateCourse($courseId, $newTitle)
+    {
+        return $this->courseModel->updateCourse($courseId, $newTitle);
+    }
 }
