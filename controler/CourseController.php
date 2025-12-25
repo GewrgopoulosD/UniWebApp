@@ -11,6 +11,23 @@ class CourseController
         $this->courseModel = new Course();
     }
 
+    function isTeacher() //make a function which see if the user is teacher, if no, we give 403 forbidden access
+    {
+
+        if (
+            !isset($_SESSION['user_id']) ||
+            !isset($_SESSION['role_id']) ||
+            $_SESSION['role_id'] !== 0
+        ) {
+            http_response_code(403);
+            echo json_encode([
+                'success' => false,
+                'error' => 'FORBIDDEN'
+            ]);
+            exit;
+        }
+    }
+
     public function fetchAllCourses()
     {
         $courses = $this->courseModel->getAllCourses();
@@ -22,18 +39,20 @@ class CourseController
 
     public function createCourse($title)
     {
-        session_start();
+        $this->isTeacher();
         $professorId = $_SESSION['user_id'];
         return $this->courseModel->addCourse($title, $professorId);
     }
 
     public function deleteCourse($courseId)
     {
+        $this->isTeacher();
         return $this->courseModel->deleteCourse($courseId);
     }
 
     public function updateCourse($courseId, $newTitle)
     {
+        $this->isTeacher();
         return $this->courseModel->updateCourse($courseId, $newTitle);
     }
 }

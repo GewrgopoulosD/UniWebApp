@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . "/../controler/CourseController.php";
 
+session_start();
 $controller = new CourseController();// create the controller to can use its methods from outside
 
 $action = $_GET['action'] ?? '';
