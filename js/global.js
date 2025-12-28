@@ -55,12 +55,3 @@ export function createElement(type, text, className, onclick) {
   }
   return element;
 }
-
-//-------------------------------//
-// Fetch Data
-//-------------------------------//
-export async function fetchData(url) {
-  //method to fetch data and not repeat the same code
-  const response = await fetch(url);
-  return await response.json();
-}

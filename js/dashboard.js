@@ -63,11 +63,11 @@ function loadDash(userRole) {
   container.append(fragment);
 
   //--------------------------------//
-  //START MAKING METHODS            //
+  //connect with modules            //
   //-------------------------------//
 
   //-------------------------------//
-  //for courses//
+  //for courses
   //------------------------------//
   btnCourses.addEventListener("click", async () => {
     await showCourses(

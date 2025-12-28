@@ -4,11 +4,16 @@ require_once __DIR__ . "/../controler/CourseController.php";
 session_start();
 $controller = new CourseController();// create the controller to can use its methods from outside
 
-$action = $_GET['action'] ?? '';
+$action = $_GET['action'] ?? ''; //check if there is parameter action , if exists we take it, else take ''
 
 switch ($action) {
     case 'bringCourses':
-        $controller->fetchAllCourses();// call the method to fetch all courses
+        $courses = $controller->fetchAllCourses();// call the method to fetch all courses
+
+        echo json_encode([
+            'success' => true,
+            'data' => $courses ? $courses : []
+        ]);
         break;
 
     case 'addCourse':
@@ -22,7 +27,6 @@ switch ($action) {
             'success' => (bool) $success,
             'message' => $success ? 'Course added!' : ($title ? 'Invalid request method' : 'No title provided')
         ]);
-
         break;
 
     case 'deleteCourse':

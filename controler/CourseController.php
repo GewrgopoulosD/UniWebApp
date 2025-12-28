@@ -2,7 +2,7 @@
 
 require_once "../models/Course.php";
 
-class CourseController
+class CourseController // we make a courseController class to handle users requests related with courses (from here will call course model functions)
 {
     private $courseModel;
 
@@ -30,11 +30,7 @@ class CourseController
 
     public function fetchAllCourses()
     {
-        $courses = $this->courseModel->getAllCourses();
-
-        header('Content-Type: application/json');//inform the browser that we send json data
-        echo json_encode($courses);// Convert PHP array to JSON to take it from js
-        exit;
+       return $this->courseModel->getAllCourses();
     }
 
     public function createCourse($title)
