@@ -63,6 +63,7 @@ export function renderList(containerDiv, rows, config = {}) {
           config.editHandler(itemId, li, row); // do what caller says
         }
       );
+      console.log("editttTTTTTT0");
       li.appendChild(editBtn); //put the edit btn in li
     }
 
@@ -77,6 +78,7 @@ export function renderList(containerDiv, rows, config = {}) {
           config.deleteHandler(itemId, li, row);
         }
       );
+      console.log("DELETEBUTTON");
       li.appendChild(deleteBtn);
     }
     ulContentInside.appendChild(li);
@@ -103,7 +105,8 @@ export function updateDashboardContent(
   btnText,
   userRole,
   apiUrl,
-  config = {}
+  config = {},
+  listConfig = {}
 ) {
   let fragmentDivContent = document.createDocumentFragment(); // make a fragment to hold temporary the contents
   divWithContentsOfChoice.innerHTML = "";
@@ -144,7 +147,7 @@ export function updateDashboardContent(
           btnSubmitForNewContent.remove();
           btnAddContent.style.display = "inline-block";
 
-          refreshList(apiUrl, divContent, config);
+          refreshList(apiUrl, divContent, listConfig);
         }
       );
 
@@ -159,5 +162,5 @@ export function updateDashboardContent(
   fragmentDivContent.appendChild(divContent);
 
   divWithContentsOfChoice.appendChild(fragmentDivContent);
-  refreshList(apiUrl, divContent, config);
+  //   refreshList(apiUrl, divContent, listConfig);
 }

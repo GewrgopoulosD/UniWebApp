@@ -31,15 +31,12 @@ async function updateCourse(courseId, newTitle) {
 //-------------------------------//
 async function deleteCourse(courseId) {
   //method to delete a course
-  let response = await fetch(
-    `./Api/ApiCourses.php?action=deleteCourse&id=${courseId}`,
-    {
-      method: "POST",
-      body: new URLSearchParams({
-        courseId: courseId, // Send as POST body, not query param
-      }),
-    }
-  );
+  let response = await fetch("./Api/ApiCourses.php?action=deleteCourse", {
+    method: "POST",
+    body: new URLSearchParams({
+      courseId, // Send as POST, not query param
+    }),
+  });
   let result = await response.json();
 
   if (!result.success) {
@@ -70,57 +67,77 @@ export async function showCourses(
       buttonsToHide.forEach((btn) => (btn.style.display = "inline-block"));
       return;
     }
-    let containerDiv = document.createElement("div");
-    containerDiv.className = "dashboardContent";
 
-    // edit delete config
-    let courseListConfig = {
-      editHandler: async (courseId, li, row) => {
-        const newTitle = prompt("Edit course title:", row.title);
-        if (newTitle) {
-          await updateCourse(courseId, newTitle.trim());
-          refreshList(
-            "./Api/ApiCourses.php?action=bringCourses",
-            containerDiv,
-            courseListConfig
-          );
-        }
-      },
-      deleteHandler: async (courseId, li, row) => {
-        if (confirm(`Delete course "${row.title}"?`)) {
-          await deleteCourse(courseId);
-          refreshList(
-            "./Api/ApiCourses.php?action=bringCourses",
-            containerDiv,
-            courseListConfig
-          );
-        }
-      },
-    };
-
-    // Config Add
-    let addCourseConfig = {
-      submitHandler: async (title) => {
-        await fetch("./Api/ApiCourses.php?action=addCourse", {
-          method: "POST",
-          body: new URLSearchParams({ title }),
-        });
-        refreshList(
-          "./Api/ApiCourses.php?action=bringCourses",
-          containerDiv,
-          courseListConfig
-        );
-      },
-    };
-    //make again update to give access to handler for making new course
     updateDashboardContent(
       div,
       "Courses",
       "Add New",
       userRole,
       "./Api/ApiCourses.php?action=bringCourses",
-      addCourseConfig
+      {},
+      {}
     );
+
+    // edit delete config
+    let courseListConfig =
+      userRole === "teacher"
+        ? {
+            editHandler: async (courseId, li, row) => {
+              let newTitle = prompt("Edit course title:", row.title);
+              if (newTitle?.trim()) {
+                await updateCourse(courseId, newTitle.trim());
+                await refreshList(
+                  "./Api/ApiCourses.php?action=bringCourses",
+                  containerDiv,
+                  courseListConfig
+                );
+              }
+            },
+            deleteHandler: async (courseId, li, row) => {
+              if (confirm(`Delete "${row.title}"?`)) {
+                await deleteCourse(courseId);
+                await refreshList(
+                  "./Api/ApiCourses.php?action=bringCourses",
+                  containerDiv,
+                  courseListConfig
+                );
+              }
+            },
+          }
+        : {};
+
+    //add course config
+    let addCourseConfig =
+      userRole === "teacher"
+        ? {
+            submitHandler: async (title) => {
+              await fetch("./Api/ApiCourses.php?action=addCourse", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: new URLSearchParams({ title }),
+              });
+              await refreshList(
+                "./Api/ApiCourses.php?action=bringCourses",
+                containerDiv,
+                courseListConfig
+              );
+            },
+          }
+        : {};
+
+    updateDashboardContent(
+      div,
+      "Courses",
+      "Add New",
+      userRole,
+      "./Api/ApiCourses.php?action=bringCourses",
+      addCourseConfig,
+      courseListConfig
+    );
+
+    let containerDiv = div.querySelector(".dashboardContent");
 
     renderList(containerDiv, coursesData.data, courseListConfig);
 
