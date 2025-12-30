@@ -24,9 +24,12 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         
         const formData = new FormData(editForm);
+        console.log(formData);
+        
+        
         
         try {
-            const response = await fetch('../Api/ApiCourses.php?action=updateCourse', {
+            const response = await fetch('./Api/ApiCourses.php?action=updateCourse', {
                 method: 'POST',
                 body: formData
             });

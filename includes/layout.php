@@ -4,13 +4,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../css/dashCss.css" />
+  <link rel="stylesheet" href="./css/dashCss.css" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   <title><?php echo $pageTitle ?? 'Education University'; ?></title>
    <?php 
   if (isset($pageCssFiles)) {
       foreach ((array)$pageCssFiles as $cssFile) {
-          echo '<link rel="stylesheet" href="../css/' . htmlspecialchars($cssFile) . '" />';
+          echo '<link rel="stylesheet" href="./css/' . htmlspecialchars($cssFile) . '" />';
       }
   }
   ?>
@@ -42,7 +42,6 @@
       
       <?php if (isset($_SESSION['user_id'])): ?>
         <li><a class="menuItem" href="dashboard.php">Dashboard</a></li>
-        <li><a class="menuItem" href="Courses.php">Courses</a></li>
         <li><a class="menuItem logout" href="?action=logout">Logout</a></li>
       <?php else: ?>
         <li><a class="menuItem login" href="Auth.php?mode=login">Login</a></li>

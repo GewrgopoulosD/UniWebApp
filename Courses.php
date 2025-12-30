@@ -46,14 +46,13 @@ ob_start();
     <div class="coursesList">
       <?php foreach ($courses as $course): ?>
         <div class="courseCard" data-course-id="<?php echo $course['course_id']; ?>">
-          <h4><?php echo htmlspecialchars($course['title_course']); ?></h4>
+          <h4>
+          <a href="Topics.php?courseId=<?php echo $course['course_id']; ?>" class="courseTitleLink">
+          <?php echo htmlspecialchars($course['title_course']); ?>
+          </a>
+        </h4>
           
-          <div class="courseCardActions">
-            <a href="Topics.php?courseId=<?php echo $course['course_id']; ?>" class="btn-view">
-              <i class="material-icons">visibility</i>
-              View Topics
-            </a>
-            
+          <div class="courseCardActions">            
             <?php if ($userType === 'teacher'): ?>
               <button class="btn-edit" onclick="openEditModal(<?php echo $course['course_id']; ?>, '<?php echo htmlspecialchars($course['title_course'], ENT_QUOTES); ?>')">
                 <i class="material-icons">edit</i>
@@ -94,7 +93,7 @@ ob_start();
 <!-- Delete Course Modal -->
 <div id="deleteCourseModal" class="modal">
   <div class="modal-content">
-    <div class="modal-header" style="background: #e63946;">
+    <div class="modal-header">
       <h2>Confirm Deletion</h2>
       <span class="close" id="closeDeleteModal">×</span>
     </div>

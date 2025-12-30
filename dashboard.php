@@ -11,7 +11,7 @@ if (!isset($_SESSION['user_id'])) {
   header("Location: index.php");
   exit();
 }
-$pageCssFiles = ['dashboard.css'];  
+$pageCssFiles = ['dashCss.css'];  
 $userControler = new UserControler();
 $userData = $userControler->getCurrentUser();
 
