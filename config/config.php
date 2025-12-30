@@ -1,6 +1,6 @@
 <?php
 
-$host = "127.0.0.1";    //we create a var with the address of the base
+$host = "localhost";    //we create a var with the address of the base
 $db = "schooldb";    // make a var with the name of the base that we want to "work"
 $user = "root";         // the username that i connect on the base
 $pass = "";             // password of the base

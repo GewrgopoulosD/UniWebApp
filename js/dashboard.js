@@ -1,5 +1,4 @@
 import { BurgerMenu, updateMenuForLoggedIn, createElement } from "./global.js";
-import { showCourses } from "./modules/coursesModule.js";
 
 BurgerMenu();
 
@@ -29,9 +28,7 @@ function loadDash(userRole) {
 
   fragment.append(header); // we put the h2 in the div
 
-  let divForActions = createElement("div", "", "actionsContainer"); // create a div to contain action buttons
-
-  const dashboardDiv = createElement("div", "", "dashboardDiv");
+  let buttonContainer = createElement("div", "", "buttonContainer"); // create a div to contain action buttons
 
   let btnCourses = createElement("button", "Courses", "coursesBtn"); // create a button to open courses
 
@@ -45,37 +42,15 @@ function loadDash(userRole) {
 
   let btnGrades = createElement("button", "Grades", "gradesBtn"); // create a button to open grades
 
-  divForActions.append(
+  buttonContainer.append(
     btnCourses,
     btnAssignments,
     btnStudentSubmissions,
     btnGrades
   );
 
-  fragment.append(divForActions, dashboardDiv);
-
-  let btnLogOut = createElement("button", "Log out", "LogOutBtn", () => {
-    window.location.href = "dashboard.php?action=logout";
-  }); // create a button to log out
-
-  fragment.append(btnLogOut);
+  fragment.append(buttonContainer);
 
   container.append(fragment);
 
-  //--------------------------------//
-  //connect with modules            //
-  //-------------------------------//
-
-  //-------------------------------//
-  //for courses
-  //------------------------------//
-  btnCourses.addEventListener("click", async () => {
-    await showCourses(
-      dashboardDiv,
-      [btnAssignments, btnStudentSubmissions, btnGrades],
-      btnCourses,
-      userRole
-    );
-  });
-  console.log("ok"); //TODO: remove it
 }
