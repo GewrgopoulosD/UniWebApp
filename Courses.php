@@ -2,87 +2,118 @@
 session_start();
 
 require_once "controler/UserControler.php";
+require_once "controler/CourseController.php";
 require_once "models/Users.php";
 require_once "models/Students.php";
 require_once "models/Teachers.php";
 
+// Redirect if not logged in
 if (!isset($_SESSION['user_id'])) {
-  header("Location: index.php");
-  exit();
+    header("Location: index.php");
+    exit();
 }
 
 $userControler = new UserControler();
-$userData = $userControler->getCurrentUser(); //call the method getCurrrentUser
+$userData = $userControler->getCurrentUser();
+$userType = $userData['userType'] ?? null;
+$username = $userData['username'] ?? null;
 
-$userType = $userData ? $userData['userType'] : null;//if find sth keep them on these var to take them in js 
-$username = $userData ? $userData['username'] : null;
+$courseController = new CourseController();
+$courses = $courseController->fetchAllCourses();
 
-if (isset($_GET['action']) && $_GET['action'] === 'logout') {
-  $userControler->logout();
-}
+$pageTitle = "Education University | Courses";
+$jsFile = "courses.js";
+$pageCssFiles = "courses.css";
 
+ob_start();
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
+<h2>Welcome <?php echo $userType === 'teacher' ? 'Mr. ' : 'Student '; ?><?php echo htmlspecialchars($username); ?></h2>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="css/dashCss.css" />
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-  <title>Education University | Login</title>
-</head>
+<?php if ($userType === 'teacher'): ?>
+<div class="courseActions">
+  <button id="addCourseBtn" class="btn-primary">
+    <i class="material-icons">add</i>
+    Add New Course
+  </button>
+</div>
+<?php endif; ?>
 
-<body>
-  <header>
-    <div class="Logo">
-      <a href="index.php"><img id="logoImage" src="photos/Logo.png" alt="university test icon" /></a>
+<div class="coursesContainer">
+  <h3>Available Courses</h3>
+  
+  <?php if ($courses && count($courses) > 0): ?>
+    <div class="coursesList">
+      <?php foreach ($courses as $course): ?>
+        <div class="courseCard" data-course-id="<?php echo $course['course_id']; ?>">
+          <h4><?php echo htmlspecialchars($course['title_course']); ?></h4>
+          
+          <div class="courseCardActions">
+            <a href="Topics.php?courseId=<?php echo $course['course_id']; ?>" class="btn-view">
+              <i class="material-icons">visibility</i>
+              View Topics
+            </a>
+            
+            <?php if ($userType === 'teacher'): ?>
+              <button class="btn-edit" onclick="openEditModal(<?php echo $course['course_id']; ?>, '<?php echo htmlspecialchars($course['title_course'], ENT_QUOTES); ?>')">
+                <i class="material-icons">edit</i>
+              </button>
+              <button class="btn-delete" onclick="openDeleteModal(<?php echo $course['course_id']; ?>)">
+                <i class="material-icons">delete</i>
+              </button>
+            <?php endif; ?>
+          </div>
+        </div>
+      <?php endforeach; ?>
     </div>
-  </header>
-  <nav class="burger">
-    <button class="hamburger">
-      <i class="material-icons">menu</i>
-    </button>
-    <button class="hamburgerC">
-      <i class="material-icons">close</i>
-    </button>
-    <ul class="menu">
-      <li>
-        <img class="menuItem active" id="photoMenu" src="photos/Logo.png" alt="university test icon" />
-      </li>
-      <li><a class="menuItem" href="index.php">Home</a></li>
-      <li><a class="menuItem" href="About.php#UnderPrograms">Studies</a></li>
-      <li><a class="menuItem" href="About.php">About us</a></li>
-      <li><a class="menuItem" href="About.php#locationHeader">Contact</a></li>
-      <li><a class="menuItem login" href="Auth.php?mode=login">Login</a></li>
-      <li><a class="menuItem signup" href="Auth.php?mode=signup">Sign up</a></li>
-    </ul>
-  </nav>
+  <?php else: ?>
+    <p class="no-courses">No courses available yet.</p>
+  <?php endif; ?>
+</div>
 
-  <div class="dashHero">
-    <img src="photos/library.jpg" alt="test" />
-    <div id="mainDiv"></div>
+<div id="editCourseModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Edit Course</h2>
+      <span class="close" id="closeEditModal">×</span>
+    </div>
+    <div class="modal-body">
+      <form id="editCourseForm">
+        <input type="hidden" name="courseId" id="edit_course_id">  <!-- Fixed name -->
+        <label for="edit_title_course">Course Title:</label>
+        <input type="text" id="edit_title_course" name="newTitle" required autocomplete="off">  <!-- Fixed name -->
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn-secondary" id="cancelEditBtn">Cancel</button>
+      <button type="submit" form="editCourseForm" class="btn-primary">Save Changes</button>
+    </div>
   </div>
+</div>
 
-  <footer>
-    <a href="index.php"><img id="footerImg" src="photos/Logo.png" alt="university test icon" /></a>
-    <div class="foot">
-      <p>&copy; 2025 Education University</p>
-      <ul>
-        <li><a href="About.php">About us</a></li>
-        <li><a href="About.php#UnderPrograms">Studies</a></li>
-        <li><a href="About.php#locationHeader">Contact</a></li>
-        <li><a href="Auth.php?mode=login">Portal</a></li>
-      </ul>
+<!-- Delete Course Modal -->
+<div id="deleteCourseModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header" style="background: #e63946;">
+      <h2>Confirm Deletion</h2>
+      <span class="close" id="closeDeleteModal">×</span>
     </div>
-  </footer>
-  <script>
-    window.userRole = <?php echo json_encode($userType); ?>;
-    window.username = <?php echo json_encode($username); ?>;
-  </script>
+    <div class="modal-body">
+      <p>Are you sure you want to delete this course?</p>
+      <p class="delete-warning">This action cannot be undone!</p>
+      
+      <form id="deleteCourseForm">
+        <input type="hidden" name="courseId" id="delete_course_id">  <!-- Fixed name -->
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn-secondary" id="cancelDeleteBtn">Cancel</button>
+      <button type="submit" form="deleteCourseForm" class="btn-delete">Yes, Delete Course</button>
+    </div>
+  </div>
+</div>
 
-  <script type="module" src="js/dashboard.js"></script>
-</body>
-
-</html>
+<?php
+$content = ob_get_clean();
+include 'includes/layout.php';
+?>

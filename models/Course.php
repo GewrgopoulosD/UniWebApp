@@ -1,6 +1,8 @@
 <?php
 
-require_once "../config/config.php";
+// require_once "../config/config.php";
+require_once __DIR__ . '/../config/config.php';
+
 
 class Course //make a class Course to handle all course related db operations
 {

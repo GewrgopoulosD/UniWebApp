@@ -1,6 +1,8 @@
 <?php
 
-require_once "../models/Course.php";
+// require_once "../models/Course.php";
+require_once __DIR__ . '/../models/Course.php';
+
 
 class CourseController // we make a courseController class to handle users requests related with courses (from here will call course model functions)
 {
