@@ -1,4 +1,5 @@
 <?php
+
 require_once __DIR__ . "/../controler/CourseController.php";
 
 session_start();
@@ -18,6 +19,8 @@ switch ($action) {
 
     case 'addCourse':
         $title = $_POST['title'] ?? null;
+        if (!$title)
+            throw new Exception("No title provided");
 
         $success = $title && $_SERVER['REQUEST_METHOD'] === 'POST'
             ? $controller->createCourse($title)

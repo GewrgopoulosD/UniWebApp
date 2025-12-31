@@ -32,7 +32,7 @@ class CourseController // we make a courseController class to handle users reque
 
     public function fetchAllCourses()
     {
-       return $this->courseModel->getAllCourses();
+        return $this->courseModel->getAllCourses();
     }
 
     public function createCourse($title)
@@ -52,5 +52,10 @@ class CourseController // we make a courseController class to handle users reque
     {
         $this->isTeacher();
         return $this->courseModel->updateCourse($courseId, $newTitle);
+    }
+
+    public function findTitleCourses($courseId)
+    {
+        return $this->courseModel->findCourseTitle($courseId);
     }
 }

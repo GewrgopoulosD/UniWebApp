@@ -6,11 +6,12 @@ document.addEventListener("DOMContentLoaded", () => {
   //when the dom is readty
 
   //add modal
-  const addModal = document.getElementById("addCourseModal"); //find modal
-  const addForm = document.getElementById("AddCourseForm"); //find form
-  const addTitleInput = document.getElementById("add_course_title"); //find input
+  const addModal = document.getElementById("addTopicsModal"); //find modal
+  const addForm = document.getElementById("AddTopicForm"); //find form
+  const addTitleInput = document.getElementById("add_topic_title"); //find input
+  const addUrlInput = document.getElementById("add_topic_url"); //find url topic
 
-  document.getElementById("addCourseBtn")?.addEventListener("click", () => {
+  document.getElementById("addTopicsBtn")?.addEventListener("click", () => {
     addModal.classList.add("active");
     addTitleInput.focus();
   });
@@ -33,36 +34,45 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const formData = new FormData(addForm);
     try {
-      const response = await fetch("./Api/ApiCourses.php?action=addCourse", {
+      const response = await fetch("./Api/ApiTopics.php?action=addTopic", {
         method: "POST",
         body: formData,
       });
       const result = await response.json();
 
       if (result.success) {
-        alert("Course added successfully!");
+        alert("Topic added successfully!");
         location.reload();
       } else {
-        alert(result.message || "Failed to add course");
+        alert(result.message || "Failed to add topic");
       }
     } catch (error) {
-      console.error("Error adding course:", error);
+      console.error("Error adding topic:", error);
       alert("An error occurred");
     }
   });
 
   //edit modal
-  const editModal = document.getElementById("editCourseModal");
-  const editForm = document.getElementById("editCourseForm");
-  const editTitleInput = document.getElementById("edit_title_course");
-  const editIdInput = document.getElementById("edit_course_id");
+  const editModal = document.getElementById("editTopicsModal"); // modal
+  const editForm = document.getElementById("editTopicForm"); // form edit
+  const editTitleInput = document.getElementById("edit_title_topic"); // new title
+  const editIdInput = document.getElementById("edit_topic_id"); //id
+  const editUrlInput = document.getElementById("edit_url_topic"); //url
+  const editBtn = document.querySelectorAll(".btn-edit"); //edit btn
 
-  window.openEditModal = function (courseId, courseTitle) {
-    editIdInput.value = courseId;
-    editTitleInput.value = courseTitle;
+  window.openEditModal = function (topicId, topicTitle, topicUrl) {
+    editIdInput.value = topicId;
+    editTitleInput.value = topicTitle;
+    editUrlInput.value = topicUrl;
     editModal.classList.add("active");
     editTitleInput.focus();
   };
+
+  editBtn.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      window.openEditModal(btn.dataset.id, btn.dataset.title, btn.dataset.url);
+    });
+  });
 
   document
     .getElementById("closeEditModal")
@@ -80,10 +90,9 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
 
     const formData = new FormData(editForm);
-    console.log(formData);
 
     try {
-      const response = await fetch("./Api/ApiCourses.php?action=updateCourse", {
+      const response = await fetch("./Api/ApiTopics.php?action=updateTopic", {
         method: "POST",
         body: formData,
       });
@@ -91,26 +100,33 @@ document.addEventListener("DOMContentLoaded", () => {
       const result = await response.json();
 
       if (result.success) {
-        alert("Course updated successfully!");
+        alert("Topic updated successfully!");
         location.reload();
       } else {
-        alert(result.message || "Failed to update course");
+        alert(result.message || "Failed to update topic");
       }
     } catch (error) {
-      console.error("Error updating course:", error);
+      console.error("Error updating topic:", error);
       alert("An error occurred");
     }
   });
 
   // delete modal
-  const deleteModal = document.getElementById("deleteCourseModal");
-  const deleteForm = document.getElementById("deleteCourseForm");
-  const deleteIdInput = document.getElementById("delete_course_id");
+  const deleteModal = document.getElementById("deleteTopicModal");
+  const deleteForm = document.getElementById("deleteTopicForm");
+  const deleteIdInput = document.getElementById("delete_topic_id");
+  const deletebtn = document.querySelectorAll(".btn-delete");
 
-  window.openDeleteModal = function (courseId) {
-    deleteIdInput.value = courseId;
+  window.openDeleteModal = async function (topicId) {
+    deleteIdInput.value = topicId;
     deleteModal.classList.add("active");
   };
+
+  deletebtn.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      window.openDeleteModal(btn.dataset.id);
+    });
+  });
 
   document
     .getElementById("closeDeleteModal")
@@ -127,12 +143,12 @@ document.addEventListener("DOMContentLoaded", () => {
   deleteForm.addEventListener("submit", async function (e) {
     e.preventDefault();
 
-    if (!confirm("Really delete this course? This cannot be undone!")) return;
+    if (!confirm("Really delete this topic? This cannot be undone!")) return;
 
     const formData = new FormData(deleteForm);
 
     try {
-      const response = await fetch("./Api/ApiCourses.php?action=deleteCourse", {
+      const response = await fetch("./Api/ApiTopics.php?action=deleteTopic", {
         method: "POST",
         body: formData,
       });
@@ -140,13 +156,13 @@ document.addEventListener("DOMContentLoaded", () => {
       const result = await response.json();
 
       if (result.success) {
-        alert("Course deleted successfully!");
+        alert("Topic deleted successfully!");
         location.reload();
       } else {
-        alert(result.message || "Failed to delete course");
+        alert(result.message || "Failed to delete topic");
       }
     } catch (error) {
-      console.error("Error deleting course:", error);
+      console.error("Error deleting topic:", error);
       alert("An error occurred");
     }
   });

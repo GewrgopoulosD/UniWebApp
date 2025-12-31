@@ -1,6 +1,6 @@
 <?php
 
-require_once "../config/config.php";
+require_once __DIR__ . "/../config/config.php";
 
 class Topic
 { // make a class Topic to handle the topic's-database operations
@@ -14,7 +14,7 @@ class Topic
 
     public function getTopics($courseId) // we make a function with a query to find all the topics which is connected with the courseId 
     {
-        $statement = $this->connection->prepare("SELECT topic_title
+        $statement = $this->connection->prepare("SELECT topic_id,topic_title,resource_url
                                                         FROM topics 
                                                         WHERE course_id = :courseId");
         $statement->execute([':courseId' => $courseId]);

@@ -1,8 +1,8 @@
 <?php
 
-require_once "../models/Topic.php";
+require_once __DIR__ . "/../models/Topic.php";
 
-class TopicController
+class TopicControllers
 {
     private $topicModel;
 

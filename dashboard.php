@@ -11,7 +11,8 @@ if (!isset($_SESSION['user_id'])) {
   header("Location: index.php");
   exit();
 }
-$pageCssFiles = ['dashCss.css'];  
+
+
 $userControler = new UserControler();
 $userData = $userControler->getCurrentUser();
 
@@ -33,6 +34,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'logout') {
 $pageTitle = "Education University | Dashboard";
 $mainDivId = "dashCont";
 $jsFile = "dashboard.js";
+$pageCssFiles = 'dashCss.css';
 
 
 ob_start();
@@ -43,7 +45,8 @@ ob_start();
 <div class="buttonContainer">
   <button type="button" class="coursesBtn" onclick="location.href='Courses.php'">Courses</button>
   <button type="button" class="assignmentsBtn" onclick="location.href='Assignments.php'">Assignments</button>
-  <button type="button" class="studentSubmissionsBtn" onclick="location.href='Submissions.php'">Student Submissions</button>
+  <button type="button" class="studentSubmissionsBtn" onclick="location.href='Submissions.php'">Student
+    Submissions</button>
   <button type="button" class="gradesBtn" onclick="location.href='Grades.php'">Grades</button>
 </div>
 

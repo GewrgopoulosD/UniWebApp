@@ -3,7 +3,7 @@
 require_once __DIR__ . "/../controler/TopicController.php";
 
 session_start();//we continue the session we took
-$controller = new TopicController(); // create an instance to use its methods
+$controller = new TopicControllers(); // create an instance to use its methods
 
 $action = $_GET['action'] ?? ''; //check if there is parameter action , if exists we take it, else take ''
 
@@ -29,6 +29,9 @@ switch ($action) {
 
             $title = $_POST['title'] ?? null;
             $resource = $_POST['resource'] ?? null;
+            if ($resource && !preg_match('#^https?://#', $resource)) {
+                $resource = 'https://' . $resource;
+            }//validation for https to not redirect to localhost.....
             $courseId = $_POST['courseId'] ?? null;
 
             if ($title && $resource && $courseId) { // check if we have all the variables

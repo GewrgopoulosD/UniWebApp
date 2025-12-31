@@ -1,6 +1,5 @@
 <?php
 
-// require_once "../config/config.php";
 require_once __DIR__ . '/../config/config.php';
 
 
@@ -45,5 +44,16 @@ class Course //make a class Course to handle all course related db operations
         );
 
         return $statement->execute([':newTitle' => $newTitle, ':courseId' => $courseId]);
+    }
+
+    public function findCourseTitle($courseId)
+    {
+        $statement = $this->connection->prepare(
+            "select title_course from Courses WHERE course_id = :courseId"
+        );
+
+        $statement->execute([':courseId' => $courseId]);
+
+        return $statement->fetch(PDO::FETCH_ASSOC);
     }
 }
