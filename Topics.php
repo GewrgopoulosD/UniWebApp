@@ -36,7 +36,7 @@ $courseName = $courseController->findTitleCourses($courseId);
 $topicController = new TopicControllers();
 $topics = $topicController->fetchTopicsById($courseId);
 
-$pageTitle = "Education University | Topic " . $courseId;
+$pageTitle = "Education University | Topic " . $courseName['title_course'];
 $jsFile = "topics.js";
 $pageCssFiles = "topics.css";
 

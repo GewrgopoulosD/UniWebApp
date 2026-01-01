@@ -19,23 +19,7 @@
     border-radius: 15px;
     margin: auto;
   }
-
-  .topicsActions button {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    border-radius: 15px;
-    font-size: 14px;
-    padding: 0 2%;
-  }
-  #addTopicsBtn:active,
-  .btn-edit:active,
-  .btn-delete:active {
-    transform: scale(0.9);
-    transform-origin: center;
-  }
-
-  .topicContainer {
+  .assignmentsContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -43,7 +27,31 @@
     gap: 10px;
   }
 
-  .topicCard {
+  .assignmentsContainer h3 {
+    text-align: center;
+  }
+
+  .AssignmentsActions button {
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    border-radius: 15px;
+    font-size: 14px;
+    padding: 0 2%;
+  }
+
+  .assignmentsCardActions button {
+    border-radius: 15px;
+  }
+
+  #addAssignmentBtn:active,
+  .btn-edit:active,
+  .btn-delete:active {
+    transform: scale(0.9);
+    transform-origin: center;
+  }
+
+  .assignmentsCard {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -51,29 +59,25 @@
     gap: 10px;
   }
 
-  .topicCardActions {
+  .assignmentsCardActions {
     display: flex;
     flex-direction: row;
   }
 
-  .topicTitleLink {
+  .AssignmentTitle {
     text-decoration: none;
     color: #1d3557;
     font-weight: 600;
   }
 
-  .topicTitleLink:hover {
+  .AssignmentTitle:hover {
     text-decoration: underline;
   }
 
-  .topicCardActions button {
-    border-radius: 15px;
-  }
-
-  .topicsList {
+  .assignmentsList {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 7px;
   }
 
   /* ===== MODAL OVERLAY ===== */
@@ -95,8 +99,8 @@
   }
 
   .modal-content {
-    width: 400px;
-    height: 250px;
+    min-width: 100%;
+    min-height: 350px;
     background-color: rgba(242, 203, 140, 1);
     border-radius: 8px;
     display: flex;
@@ -140,21 +144,25 @@
     text-align: center;
   }
 
-  #AddTopicForm,
-  #editTopicForm {
+  #AddAssignmentsForm,
+  #editAssignmentsForm {
     display: grid;
     grid-template-rows: auto auto;
     grid-template-columns: 30% 65%;
     row-gap: 5px;
     font-size: 20px;
   }
-  #AddTopicForm input,
-  #editTopicForm input {
-    font-size: 18px;
+  #AddAssignmentsForm input,
+  #AddAssignmentsForm textarea,
+  #AddAssignmentsForm select,
+  #editAssignmentsForm input,
+  #editAssignmentsForm textarea {
+    font-size: 16px;
+    border-radius: 15px;
   }
 
-  #edit_title_course {
-    font-size: 16px;
+  textarea {
+    min-height: 150px;
   }
 
   .modal-footer {
@@ -189,23 +197,7 @@
     border-radius: 15px;
     margin: auto;
   }
-
-  .topicsActions button {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    border-radius: 15px;
-    font-size: 15px;
-    padding: 0 2%;
-  }
-  #addTopicsBtn:active,
-  .btn-edit:active,
-  .btn-delete:active {
-    transform: scale(0.9);
-    transform-origin: center;
-  }
-
-  .topicContainer {
+  .assignmentsContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -213,7 +205,31 @@
     gap: 10px;
   }
 
-  .topicCard {
+  .assignmentsContainer h3 {
+    text-align: center;
+  }
+
+  .AssignmentsActions button {
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    border-radius: 15px;
+    font-size: 15px;
+    padding: 0 2%;
+  }
+
+  .assignmentsCardActions button {
+    border-radius: 15px;
+  }
+
+  #addAssignmentBtn:active,
+  .btn-edit:active,
+  .btn-delete:active {
+    transform: scale(0.9);
+    transform-origin: center;
+  }
+
+  .assignmentsCard {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -221,30 +237,25 @@
     gap: 10px;
   }
 
-  .topicCardActions {
+  .assignmentsCardActions {
     display: flex;
     flex-direction: row;
   }
 
-  .topicTitleLink {
+  .AssignmentTitle {
     text-decoration: none;
     color: #1d3557;
     font-weight: 600;
-    font-size: larger;
   }
 
-  .topicTitleLink:hover {
+  .AssignmentTitle:hover {
     text-decoration: underline;
   }
 
-  .topicCardActions button {
-    border-radius: 15px;
-  }
-
-  .topicsList {
+  .assignmentsList {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 7px;
   }
 
   /* ===== MODAL OVERLAY ===== */
@@ -266,8 +277,9 @@
   }
 
   .modal-content {
-    width: 400px;
-    height: 250px;
+    min-width: 50%;
+    max-width: auto;
+    min-height: 350px;
     background-color: rgba(242, 203, 140, 1);
     border-radius: 8px;
     display: flex;
@@ -291,7 +303,7 @@
   #closeAddModal,
   #closeEditModal,
   #closeDeleteModal {
-    font-size: 40px;
+    font-size: 41px;
   }
   #closeAddModal:hover,
   #closeEditModal:hover,
@@ -307,25 +319,29 @@
 
   .modal-body {
     width: 100%;
-    font-size: 22px;
+    font-size: 21px;
     text-align: center;
   }
 
-  #AddTopicForm,
-  #editTopicForm {
+  #AddAssignmentsForm,
+  #editAssignmentsForm {
     display: grid;
     grid-template-rows: auto auto;
     grid-template-columns: 30% 65%;
     row-gap: 5px;
     font-size: 21px;
   }
-  #AddTopicForm input,
-  #editTopicForm input {
-    font-size: 18px;
+  #AddAssignmentsForm input,
+  #AddAssignmentsForm textarea,
+  #AddAssignmentsForm select,
+  #editAssignmentsForm input,
+  #editAssignmentsForm textarea {
+    font-size: 17px;
+    border-radius: 15px;
   }
 
-  #edit_title_topic {
-    font-size: 16px;
+  textarea {
+    min-height: 150px;
   }
 
   .modal-footer {
@@ -342,5 +358,9 @@
   }
   .modal-footer button:active {
     transform: scale(0.9);
+  }
+
+  .assignmentsCard h4 {
+    font-size: larger;
   }
 }

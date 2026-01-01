@@ -30,7 +30,7 @@ html {
 
   /* LOGO UNIVERSITY ICON */
   #logoImage {
-    height: 100%;
+    max-height: 100%;
   }
 
   /* BURGER MENU */

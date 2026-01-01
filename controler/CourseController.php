@@ -1,6 +1,5 @@
 <?php
 
-// require_once "../models/Course.php";
 require_once __DIR__ . '/../models/Course.php';
 
 
@@ -13,7 +12,7 @@ class CourseController // we make a courseController class to handle users reque
         $this->courseModel = new Course();
     }
 
-    function isTeacher() //make a function which see if the user is teacher, if no, we give 403 forbidden access
+    private function isTeacher() //make a function which see if the user is teacher, if no, we give 403 forbidden access
     {
 
         if (

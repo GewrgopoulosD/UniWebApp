@@ -7,11 +7,11 @@
   <link rel="stylesheet" href="./css/dashCss.css" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   <title><?php echo $pageTitle ?? 'Education University'; ?></title>
-   <?php 
+  <?php
   if (isset($pageCssFiles)) {
-      foreach ((array)$pageCssFiles as $cssFile) {
-          echo '<link rel="stylesheet" href="./css/' . htmlspecialchars($cssFile) . '" />';
-      }
+    foreach ((array) $pageCssFiles as $cssFile) {
+      echo '<link rel="stylesheet" href="./css/' . htmlspecialchars($cssFile) . '" />';
+    }
   }
   ?>
 
@@ -39,7 +39,7 @@
       <li><a class="menuItem" href="About.php#UnderPrograms">Studies</a></li>
       <li><a class="menuItem" href="About.php">About us</a></li>
       <li><a class="menuItem" href="About.php#locationHeader">Contact</a></li>
-      
+
       <?php if (isset($_SESSION['user_id'])): ?>
         <li><a class="menuItem" href="dashboard.php">Dashboard</a></li>
         <li><a class="menuItem logout" href="?action=logout">Logout</a></li>
@@ -74,9 +74,11 @@
     <script>
       window.userRole = <?php echo json_encode($userType ?? null); ?>;
       window.username = <?php echo json_encode($username ?? null); ?>;
-      <?php if (isset($additionalJsVars)) echo $additionalJsVars; ?>
+      <?php if (isset($additionalJsVars))
+        echo $additionalJsVars; ?>
     </script>
     <script type="module" src="js/<?php echo $jsFile; ?>"></script>
   <?php endif; ?>
 </body>
+
 </html>
