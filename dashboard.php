@@ -45,7 +45,7 @@ ob_start();
 <div class="buttonContainer">
   <button type="button" class="coursesBtn" onclick="location.href='Courses.php'">Courses</button>
   <button type="button" class="assignmentsBtn" onclick="location.href='Assignments.php'">Assignments</button>
-  <button type="button" class="studentSubmissionsBtn" onclick="location.href='Submissions.php'">Student
+  <button type="button" class="studentSubmissionsBtn" onclick="location.href='StudentSubmissions.php'">Student
     Submissions</button>
   <button type="button" class="gradesBtn" onclick="location.href='Grades.php'">Grades</button>
 </div>

@@ -14,7 +14,7 @@
     place-items: center;
     width: 90%;
     max-width: 100%;
-    min-height: auto;
+    min-height: 300px;
     max-height: auto;
     border-radius: 15px;
     margin: auto;
@@ -24,31 +24,29 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
   }
 
   .assignmentsContainer h3 {
     text-align: center;
+    font-size: 21px;
   }
 
-  .AssignmentsActions button {
-    max-width: 100%;
-    display: flex;
-    align-items: center;
+  .btn-view-submissions,
+  .btn-submit-assignment {
     border-radius: 15px;
-    font-size: 14px;
-    padding: 0 2%;
+    padding: 0 8px;
+    font-size: 15px;
   }
 
-  .assignmentsCardActions button {
-    border-radius: 15px;
-  }
-
-  #addAssignmentBtn:active,
-  .btn-edit:active,
-  .btn-delete:active {
+  .btn-view-submissions:hover,
+  .btn-submit-assignment:hover {
     transform: scale(0.9);
-    transform-origin: center;
+  }
+
+  .btn-view-submissions:active,
+  .btn-submit-assignment:active {
+    transform: scale(0.8);
   }
 
   .assignmentsCard {
@@ -68,16 +66,14 @@
     text-decoration: none;
     color: #1d3557;
     font-weight: 600;
-  }
-
-  .AssignmentTitle:hover {
-    text-decoration: underline;
+    font-size: 18px;
   }
 
   .assignmentsList {
     display: flex;
     flex-direction: column;
     gap: 7px;
+    overflow: auto;
   }
 
   /* ===== MODAL OVERLAY ===== */
@@ -121,24 +117,18 @@
     border-bottom: 2px solid black;
   }
 
-  #closeAddModal,
-  #closeEditModal,
-  #closeDeleteModal,
-  #closePreviewModal {
+  #closeSubmissionsModal {
     font-size: 40px;
   }
-  #closeAddModal:hover,
-  #closeEditModal:hover,
-  #closeDeleteModal:hover,
-  #closePreviewModal:hover {
+
+  #closeSubmissionsModal:hover,
+  #closeSubmissionsBtn:hover {
     transform: scale(0.9);
     cursor: pointer;
   }
 
-  #closeAddModal:active,
-  #closeEditModal:active,
-  #closeDeleteModal:hover,
-  #closePreviewModal:hover {
+  #closeSubmissionsModal:active,
+  #closeSubmissionsBtn:active {
     transform: scale(0.8);
   }
 
@@ -150,34 +140,31 @@
     overflow: auto;
   }
 
-  #AddAssignmentsForm,
-  #editAssignmentsForm {
-    display: grid;
-    grid-template-rows: auto auto;
-    grid-template-columns: 30% 65%;
-    row-gap: 5px;
-    font-size: 20px;
+  .submissionsTable {
+    justify-self: center;
   }
-  #AddAssignmentsForm input,
-  #AddAssignmentsForm textarea,
-  #AddAssignmentsForm select,
-  #editAssignmentsForm input,
-  #editAssignmentsForm textarea {
-    font-size: 16px;
+
+  .submissionsTable th,
+  .submissionsTable td {
+    padding: 5px 10px;
+  }
+
+  .btn-save-grade,
+  .grade-input {
     border-radius: 15px;
+    padding: 0 4px;
+    font-size: 15px;
   }
 
-  textarea {
-    min-height: 150px;
+  .btn-save-grade {
+    cursor: pointer;
   }
 
-  #preview_description {
-    margin: 5% auto;
+  .btn-save-grade:hover {
+    transform: scale(0.9);
   }
-  #preview_deadline {
-    font-weight: bolder;
-    font-size: larger;
-    text-decoration: underline;
+  .btn-save-grade:active {
+    transform: scale(0.8);
   }
 
   .modal-footer {
@@ -217,31 +204,31 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
   }
 
   .assignmentsContainer h3 {
     text-align: center;
+    font-size: 21px;
   }
 
-  .AssignmentsActions button {
-    max-width: 100%;
-    display: flex;
-    align-items: center;
+  .btn-view-submissions,
+  .btn-submit-assignment {
     border-radius: 15px;
-    font-size: 15px;
-    padding: 0 2%;
+    padding: 0 8px;
+    font-size: larger;
+    display: inline-block;
   }
 
-  .assignmentsCardActions button {
-    border-radius: 15px;
-  }
-
-  #addAssignmentBtn:active,
-  .btn-edit:active,
-  .btn-delete:active {
+  .btn-view-submissions:hover,
+  .btn-submit-assignment:hover {
     transform: scale(0.9);
     transform-origin: center;
+  }
+
+  .btn-view-submissions:active,
+  .btn-submit-assignment:active {
+    transform: scale(0.8);
   }
 
   .assignmentsCard {
@@ -261,16 +248,14 @@
     text-decoration: none;
     color: #1d3557;
     font-weight: 600;
-  }
-
-  .AssignmentTitle:hover {
-    text-decoration: underline;
+    font-size: 18px;
   }
 
   .assignmentsList {
     display: flex;
     flex-direction: column;
     gap: 7px;
+    overflow: auto;
   }
 
   /* ===== MODAL OVERLAY ===== */
@@ -285,7 +270,6 @@
     justify-content: center;
     align-items: center;
     z-index: 1001;
-    overflow: auto;
   }
 
   .modal.active {
@@ -293,8 +277,7 @@
   }
 
   .modal-content {
-    min-width: 65%;
-    max-width: auto;
+    min-width: 100%;
     min-height: 350px;
     background-color: rgba(242, 203, 140, 1);
     border-radius: 8px;
@@ -316,62 +299,54 @@
     border-bottom: 2px solid black;
   }
 
-  #closeAddModal,
-  #closeEditModal,
-  #closeDeleteModal,
-  #closePreviewModal {
-    font-size: 41px;
+  #closeSubmissionsModal {
+    font-size: 40px;
   }
-  #closeAddModal:hover,
-  #closeEditModal:hover,
-  #closeDeleteModal:hover,
-  #closePreviewModal:hover {
+
+  #closeSubmissionsModal:hover,
+  #closeSubmissionsBtn:hover {
     transform: scale(0.9);
     cursor: pointer;
   }
-  #closeAddModal:active,
-  #closeEditModal:active,
-  #closeDeleteModal:active,
-  #closePreviewModal:active {
+
+  #closeSubmissionsModal:active,
+  #closeSubmissionsBtn:active {
     transform: scale(0.8);
   }
 
   .modal-body {
     width: 100%;
-    font-size: 21px;
+    max-height: 500px;
+    font-size: 20px;
     text-align: center;
-    max-height: 600px;
     overflow: auto;
   }
 
-  #AddAssignmentsForm,
-  #editAssignmentsForm {
-    display: grid;
-    grid-template-rows: auto auto;
-    grid-template-columns: 30% 65%;
-    row-gap: 5px;
-    font-size: 21px;
+  .submissionsTable {
+    justify-self: center;
   }
-  #AddAssignmentsForm input,
-  #AddAssignmentsForm textarea,
-  #AddAssignmentsForm select,
-  #editAssignmentsForm input,
-  #editAssignmentsForm textarea {
-    font-size: 17px;
+
+  .submissionsTable th,
+  .submissionsTable td {
+    padding: 5px 20px;
+  }
+
+  .btn-save-grade,
+  .grade-input {
     border-radius: 15px;
+    padding: 0 4px;
+    font-size: 18px;
   }
 
-  textarea {
-    min-height: 150px;
+  .btn-save-grade {
+    cursor: pointer;
   }
 
-  #preview_description {
-    margin: 3% auto;
+  .btn-save-grade:hover {
+    transform: scale(0.9);
   }
-  #preview_deadline {
-    font-weight: bolder;
-    font-size: larger;
-    text-decoration: underline;
+  .btn-save-grade:active {
+    transform: scale(0.8);
   }
 
   .modal-footer {
@@ -388,9 +363,5 @@
   }
   .modal-footer button:active {
     transform: scale(0.9);
-  }
-
-  .assignmentsCard h4 {
-    font-size: larger;
   }
 }

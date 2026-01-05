@@ -12,7 +12,7 @@ html {
   body {
     display: grid;
     grid-template-rows: 18vh 1fr auto;
-    grid-template-columns: 40vw 20vw 40vw;
+    grid-template-columns: 40% 20% 40%;
     grid-template-areas:
       "logo null burger"
       "Main Main Main"
@@ -167,7 +167,7 @@ html {
 
   footer {
     grid-area: footer;
-    width: 100vw;
+    width: 100%;
     display: grid;
     grid-template-rows: 100%;
     grid-template-columns: 40% 60%;
@@ -208,7 +208,7 @@ html {
   body {
     display: grid;
     grid-template-rows: 18vh 1fr auto;
-    grid-template-columns: 40vw 20vw 40vw;
+    grid-template-columns: 40% 20% 40%;
     grid-template-areas:
       "logo null burger"
       "Main Main Main"
@@ -366,7 +366,7 @@ html {
 
   footer {
     grid-area: footer;
-    width: 100vw;
+    width: 100%;
     display: grid;
     grid-template-rows: 100%;
     grid-template-columns: 40% 60%;
@@ -406,7 +406,7 @@ html {
   body {
     display: grid;
     grid-template-rows: 23vh 1fr auto;
-    grid-template-columns: 30vw 30vw 40vw;
+    grid-template-columns: 30% 30% 40%;
     grid-template-areas:
       "logo nav nav"
       "Main Main Main"
@@ -582,7 +582,7 @@ html {
 
   footer {
     grid-area: footer;
-    width: 100vw;
+    width: 100%;
     display: grid;
     grid-template-rows: 100%;
     grid-template-columns: 20% 80%;
@@ -631,7 +631,7 @@ html {
   body {
     display: grid;
     grid-template-rows: 23vh 1fr 12%;
-    grid-template-columns: 30vw 30vw 40vw;
+    grid-template-columns: 30% 30% 40%;
     grid-template-areas:
       "logo nav nav"
       "Main Main Main"
@@ -806,7 +806,7 @@ html {
 
   footer {
     grid-area: footer;
-    width: 100vw;
+    width: 100%;
     display: grid;
     grid-template-rows: 100%;
     grid-template-columns: 20% 80%;
