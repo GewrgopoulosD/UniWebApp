@@ -21,7 +21,7 @@ switch ($action) {
         ]);
         break;
 
-    case 'bringAllStudents':
+    case 'bringAllStudents'://test 
 
         $students = $controller->fetchGradesForTeachers();
         echo json_encode([
@@ -43,6 +43,24 @@ switch ($action) {
             echo json_encode([
                 'success' => false,
                 'error' => 'No user_id provided'
+            ]);
+        }
+        break;
+
+    case 'SearchingFor':
+
+        $studentName = $_GET['username'] ?? null;
+
+        if ($studentName !== null) {
+            $grades = $controller->fetchStudentByName($studentName);
+            echo json_encode([
+                'success' => true,
+                'grades' => $grades
+            ]);
+        } else {
+            echo json_encode([
+                'success' => false,
+                'error' => 'There is not user with this username'
             ]);
         }
         break;

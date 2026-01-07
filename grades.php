@@ -50,13 +50,16 @@ ob_start();
 </h2>
 
 <?php if ($userType === 'student'): ?>
-    <div class="gradesContainer">
-    </div>
+    <div class="gradesContainer"></div>
 
 <?php else: ?>
 
     <div class="gradesContainer">
-        <h3>Available students</h3>
+        <div class="gradesConHeader">
+            <h3>Available students</h3>
+            <input id="search" type="text" placeholder="Searching...">
+        </div>
+        <div class="gradesListLive"></div>
 
         <?php if ($students && count($students) > 0): ?>
             <div class="gradesList">

@@ -45,4 +45,10 @@ class GradesController
         $this->isTeacher();
         return $this->gradesModel->getGradesForId($userId);
     }
+
+    public function fetchStudentByName($username)
+    {
+        $this->isTeacher();
+        return $this->gradesModel->getStudentByName($username);
+    }
 }

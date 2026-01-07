@@ -38,4 +38,21 @@ class Grades
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getStudentByName($username)
+    {
+
+        try {
+            $sql = "SELECT user_id, username, email
+                    FROM users 
+                    WHERE role_id = 1 AND username LIKE :username";
+
+            $stmt = $this->connection->prepare($sql);
+            $stmt->execute([':username' => "%$username%"]);
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
 }

@@ -29,6 +29,24 @@
     overflow: auto;
   }
 
+  .gradesConHeader {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    row-gap: 10px;
+  }
+
+  #search {
+    border-radius: 15px;
+    font-size: large;
+    padding: 5px;
+  }
+
+  .no-student {
+    font-size: large;
+  }
+
   .gradesTable td,
   .gradesTable th {
     padding: 5px 5px;
@@ -167,9 +185,22 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: start;
     gap: 10px;
     overflow: auto;
+  }
+
+  .gradesConHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0 175px;
+  }
+
+  #search {
+    border-radius: 15px;
+    font-size: larger;
+    padding: 5px;
   }
 
   .gradesList {
