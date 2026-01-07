@@ -48,9 +48,9 @@ ob_start();
     <?php echo $userType === 'teacher' ? 'Mr. ' : 'Student '; ?>
     <?php echo htmlspecialchars($username); ?>
 </h2>
+
 <?php if ($userType === 'student'): ?>
     <div class="gradesContainer">
-        <h3>My Grades</h3>
     </div>
 
 <?php else: ?>

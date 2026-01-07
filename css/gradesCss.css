@@ -29,6 +29,12 @@
     overflow: auto;
   }
 
+  .gradesTable td,
+  .gradesTable th {
+    padding: 5px 5px;
+    text-align: center;
+  }
+
   .studentUsernameLink a {
     text-decoration: none;
     color: #1d3557;
@@ -60,7 +66,8 @@
 
   .modal-content {
     width: 400px;
-    height: 250px;
+    min-height: 250px;
+    max-height: 400px;
     background-color: rgba(242, 203, 140, 1);
     border-radius: 8px;
     display: flex;
@@ -81,20 +88,17 @@
     border-bottom: 2px solid black;
   }
 
-  #closeAddModal,
-  #closeEditModal,
-  #closeDeleteModal {
+  #closePreviewModal {
     font-size: 40px;
+    cursor: pointer;
   }
-  #closeAddModal:hover,
-  #closeEditModal:hover,
-  #closeDeleteModal:hover {
+
+  #closePreviewModall:hover {
     transform: scale(0.9);
     cursor: pointer;
   }
-  #closeAddModal:active,
-  #closeEditModal:active,
-  #closeDeleteModal:hover {
+
+  #closePreviewModal:hover {
     transform: scale(0.8);
   }
 
@@ -102,6 +106,7 @@
     width: 100%;
     font-size: 20px;
     text-align: center;
+    overflow: auto;
   }
 
   #AddTopicForm,
@@ -130,11 +135,15 @@
 
   .modal-footer button {
     border-radius: 15px;
-    font-size: 14px;
-    padding: 0 2%;
+    font-size: 20px;
+    padding: 2% 10%;
+    cursor: pointer;
+  }
+  .modal-footer button:hover {
+    transform: scale(0.9);
   }
   .modal-footer button:active {
-    transform: scale(0.9);
+    transform: scale(0.8);
   }
 }
 @media (min-width: 641px) {
@@ -154,61 +163,30 @@
     margin: auto;
   }
 
-  .topicsActions button {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    border-radius: 15px;
-    font-size: 15px;
-    padding: 0 2%;
-  }
-  #addTopicsBtn:active,
-  .btn-edit:active,
-  .btn-delete:active {
-    transform: scale(0.9);
-    transform-origin: center;
-  }
-
-  .topicContainer {
+  .gradesContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 10px;
+    overflow: auto;
   }
 
-  .topicCard {
+  .gradesList {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
+    flex-direction: column;
+    row-gap: 5px;
   }
 
-  .topicCardActions {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .topicTitleLink {
+  .studentUsernameLink a {
     text-decoration: none;
     color: #1d3557;
     font-weight: 600;
     font-size: larger;
   }
 
-  .topicTitleLink:hover {
+  .studentUsernameLink:hover {
     text-decoration: underline;
-  }
-
-  .topicCardActions button {
-    border-radius: 15px;
-  }
-
-  .topicsList {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
   }
 
   /* ===== MODAL OVERLAY ===== */
@@ -230,8 +208,11 @@
   }
 
   .modal-content {
-    width: 400px;
-    height: 250px;
+    width: auto;
+    min-width: 400px;
+    max-width: 700px;
+    min-height: 250px;
+    max-height: 700px;
     background-color: rgba(242, 203, 140, 1);
     border-radius: 8px;
     display: flex;
@@ -252,44 +233,35 @@
     border-bottom: 2px solid black;
   }
 
-  #closeAddModal,
-  #closeEditModal,
-  #closeDeleteModal {
+  #closePreviewModal {
     font-size: 40px;
+    cursor: pointer;
   }
-  #closeAddModal:hover,
-  #closeEditModal:hover,
-  #closeDeleteModal:hover {
+
+  #closePreviewModall:hover {
     transform: scale(0.9);
     cursor: pointer;
   }
-  #closeAddModal:active,
-  #closeEditModal:active,
-  #closeDeleteModal:hover {
+
+  #closePreviewModal:hover {
     transform: scale(0.8);
   }
 
   .modal-body {
     width: 100%;
     font-size: 22px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+  }
+
+  .gradesTable td,
+  .gradesTable th {
+    padding: 5px 5px;
     text-align: center;
-  }
-
-  #AddTopicForm,
-  #editTopicForm {
-    display: grid;
-    grid-template-rows: auto auto;
-    grid-template-columns: 30% 65%;
-    row-gap: 5px;
-    font-size: 21px;
-  }
-  #AddTopicForm input,
-  #editTopicForm input {
-    font-size: 18px;
-  }
-
-  #edit_title_topic {
-    font-size: 16px;
   }
 
   .modal-footer {
@@ -301,10 +273,14 @@
 
   .modal-footer button {
     border-radius: 15px;
-    font-size: 15px;
-    padding: 0 2%;
+    font-size: 20px;
+    padding: 2% 10%;
+    cursor: pointer;
+  }
+  .modal-footer button:hover {
+    transform: scale(0.9);
   }
   .modal-footer button:active {
-    transform: scale(0.9);
+    transform: scale(0.8);
   }
 }

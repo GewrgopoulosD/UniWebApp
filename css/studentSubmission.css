@@ -37,6 +37,7 @@
     border-radius: 15px;
     padding: 0 8px;
     font-size: 15px;
+    cursor: pointer;
   }
 
   .btn-view-submissions:hover,
@@ -218,6 +219,7 @@
     padding: 0 8px;
     font-size: larger;
     display: inline-block;
+    cursor: pointer;
   }
 
   .btn-view-submissions:hover,

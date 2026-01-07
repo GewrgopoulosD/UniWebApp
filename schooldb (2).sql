@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Εξυπηρετητής: localhost
--- Χρόνος δημιουργίας: 03 Ιαν 2026 στις 19:20:53
+-- Χρόνος δημιουργίας: 07 Ιαν 2026 στις 12:51:22
 -- Έκδοση διακομιστή: 10.4.28-MariaDB
 -- Έκδοση PHP: 8.2.4
 
@@ -21,11 +21,15 @@ SET time_zone = "+00:00";
 -- Βάση δεδομένων: `schooldb`
 --
 
--- --------------------------------------------------------
-
+-- -------------------------------------------------------
 --
 -- Δομή πίνακα για τον πίνακα `assignments`
 --
+
+drop database if exists schooldb;
+create database schooldb;
+use schooldb;
+
 
 CREATE TABLE `assignments` (
   `assignment_id` int(11) NOT NULL,
@@ -42,7 +46,33 @@ CREATE TABLE `assignments` (
 
 INSERT INTO `assignments` (`assignment_id`, `course_id`, `assignment_title`, `assignment_description`, `deadline`, `created_at`) VALUES
 (12, 1, 'Σύστημα Διαχείρισης Κρατήσεων για Καταδυτικό Κέντρο', 'Να αναπτυχθεί μια web εφαρμογή με χρήση PHP & MySQL, η οποία επιτρέπει τη διαχείριση κρατήσεων πελατών για ένα καταδυτικό κέντρο.\r\n\r\n-Τεχνολογίες\r\nPHP\r\nMySQL\r\nHTML / CSS\r\n(Προαιρετικά) JavaScript\r\nApache (XAMPP ή WAMP).\r\n\r\n-Περιγραφή Συστήματος\r\nΗ εφαρμογή πρέπει να υποστηρίζει δύο ρόλους:\r\nΧρήστης (Client)\r\nΔιαχειριστής (Admin)', '2026-04-01', '2026-01-02 21:21:32'),
-(13, 5, 'Διαχείριση Βιβλιοθήκης (Library Management System)', 'Να αναπτυχθεί μια κονσόλα/desktop εφαρμογή σε Java, η οποία επιτρέπει τη διαχείριση βιβλίων, χρηστών και δανεισμών σε μια βιβλιοθήκη.\r\n\r\n-Τεχνολογίες\r\nJava SE \r\nEclipse ή IntelliJ IDEA\r\n(Προαιρετικά) SQLite ή MySQL για αποθήκευση δεδομένων.\r\n\r\n-Λειτουργίες Χρήστη\r\nΕγγραφή & Σύνδεση\r\nΑναζήτηση βιβλίων (κατά τίτλο ή συγγραφέα)\r\nΔανεισμός βιβλίου\r\nΠροβολή των δανεισμένων βιβλίων του.\r\n\r\n-Λειτουργίες Διαχειριστή\r\nΠροσθήκη / Επεξεργασία / Διαγραφή βιβλίων\r\nΠροβολή όλων των δανεισμών\r\nΈγκριση ή απόρριψη αιτήματος δανεισμού\r\nΔιαχείριση χρηστών (προαιρετικά).', '2026-05-01', '2026-01-02 21:30:41');
+(13, 5, 'Διαχείριση Βιβλιοθήκης (Library Management System)', 'Να αναπτυχθεί μια κονσόλα/desktop εφαρμογή σε Java, η οποία επιτρέπει τη διαχείριση βιβλίων, χρηστών και δανεισμών σε μια βιβλιοθήκη.\r\n\r\n-Τεχνολογίες\r\nJava SE \r\nEclipse ή IntelliJ IDEA\r\n(Προαιρετικά) SQLite ή MySQL για αποθήκευση δεδομένων.\r\n\r\n-Λειτουργίες Χρήστη\r\nΕγγραφή & Σύνδεση\r\nΑναζήτηση βιβλίων (κατά τίτλο ή συγγραφέα)\r\nΔανεισμός βιβλίου\r\nΠροβολή των δανεισμένων βιβλίων του.\r\n\r\n-Λειτουργίες Διαχειριστή\r\nΠροσθήκη / Επεξεργασία / Διαγραφή βιβλίων\r\nΠροβολή όλων των δανεισμών\r\nΈγκριση ή απόρριψη αιτήματος δανεισμού\r\nΔιαχείριση χρηστών (προαιρετικά).', '2026-05-01', '2026-01-02 21:30:41'),
+(15, 1, 'test1', 'dasdasd', '2026-01-15', '2026-01-07 12:38:23'),
+(16, 1, 'test2', 'rewrew', '2026-01-29', '2026-01-07 12:38:38'),
+(17, 1, 'test3', 'asdasda', '2026-01-30', '2026-01-07 12:38:50'),
+(18, 1, 'test4', 'dasdasd', '2026-01-17', '2026-01-07 12:38:58');
+
+--
+-- Δείκτες `assignments`
+--
+DELIMITER $$
+CREATE TRIGGER `check_teacher_before_insert_assignment` BEFORE INSERT ON `assignments` FOR EACH ROW BEGIN
+    DECLARE teacherRole INT;
+
+    
+    SELECT role_id
+    INTO teacherRole
+    FROM users
+    WHERE user_id = (SELECT professor_id FROM courses WHERE course_id = NEW.course_id);
+
+   
+    IF teacherRole != 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Only teachers can create assignments!';
+    END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -100,6 +130,36 @@ CREATE TABLE `submissions` (
   `submitted_at` datetime DEFAULT current_timestamp(),
   `grade` decimal(5,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Άδειασμα δεδομένων του πίνακα `submissions`
+--
+
+INSERT INTO `submissions` (`submission_id`, `assignment_id`, `user_id`, `file_path`, `submitted_at`, `grade`) VALUES
+(1, 12, 25, NULL, '2026-01-04 14:26:58', 6.90),
+(5, 13, 25, '25', '2026-01-05 16:44:47', 4.00);
+
+--
+-- Δείκτες `submissions`
+--
+DELIMITER $$
+CREATE TRIGGER `check_student_before_insert_submission` BEFORE INSERT ON `submissions` FOR EACH ROW BEGIN
+    DECLARE userRole INT;
+
+    -- Παίρνουμε το role_id του χρήστη που προσπαθεί να υποβάλει
+    SELECT role_id
+    INTO userRole
+    FROM users
+    WHERE user_id = NEW.user_id;
+
+    -- Αν δεν είναι φοιτητής (role_id != 1) τότε ακυρώνουμε
+    IF userRole != 1 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Only students can submit assignments!';
+    END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -199,25 +259,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT για πίνακα `assignments`
 --
 ALTER TABLE `assignments`
-  MODIFY `assignment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `assignment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT για πίνακα `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT για πίνακα `submissions`
 --
 ALTER TABLE `submissions`
-  MODIFY `submission_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `submission_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT για πίνακα `topics`
 --
 ALTER TABLE `topics`
-  MODIFY `topic_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `topic_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT για πίνακα `users`

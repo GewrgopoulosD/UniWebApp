@@ -27,6 +27,7 @@
     border-radius: 15px;
     font-size: 14px;
     padding: 0 2%;
+    cursor: pointer;
   }
   #addCourseBtn:active,
   .btn-edit:active,
@@ -68,6 +69,7 @@
 
   .courseCardActions button {
     border-radius: 15px;
+    cursor: pointer;
   }
 
   .coursesList {
@@ -117,16 +119,19 @@
     border-bottom: 2px solid black;
   }
 
+  #closeAddModal,
   #closeEditModal,
   #closeDeleteModal {
     font-size: 40px;
   }
 
+  #closeAddModal:hover,
   #closeEditModal:hover,
   #closeDeleteModal:hover {
     transform: scale(0.9);
     cursor: pointer;
   }
+  #closeAddModal:active,
   #closeEditModal:active,
   #closeDeleteModal:hover {
     transform: scale(0.8);
@@ -151,6 +156,7 @@
     border-radius: 15px;
     font-size: 14px;
     padding: 0 2%;
+    cursor: pointer;
   }
   .modal-footer button:active {
     transform: scale(0.9);
@@ -183,6 +189,7 @@
     border-radius: 15px;
     font-size: 15px;
     padding: 0 2%;
+    cursor: pointer;
   }
   #addCourseBtn:active,
   .btn-edit:active,
@@ -229,6 +236,7 @@
 
   .courseCardActions button {
     border-radius: 15px;
+    cursor: pointer;
   }
 
   .coursesList {
@@ -278,17 +286,20 @@
     border-bottom: 2px solid black;
   }
   #closeEditModal,
-  #closeDeleteModal {
+  #closeDeleteModal,
+  #closeAddModal {
     font-size: 40px;
   }
 
   #closeEditModal:hover,
-  #closeDeleteModal:hover {
+  #closeDeleteModal:hover,
+  #closeAddModal:hover {
     transform: scale(0.9);
     cursor: pointer;
   }
   #closeEditModal:active,
-  #closeDeleteModal:hover {
+  #closeDeleteModal:hover,
+  #closeAddModal:hover {
     transform: scale(0.8);
   }
 
@@ -313,6 +324,7 @@
     border-radius: 15px;
     font-size: 15px;
     padding: 0 2%;
+    cursor: pointer;
   }
   .modal-footer button:active {
     transform: scale(0.9);
@@ -345,6 +357,7 @@
     border-radius: 15px;
     font-size: 15px;
     padding: 0 2%;
+    cursor: pointer;
   }
   #addCourseBtn:active,
   .btn-edit:active,
@@ -391,6 +404,7 @@
 
   .courseCardActions button {
     border-radius: 15px;
+    cursor: pointer;
   }
 
   .coursesList {
@@ -440,17 +454,20 @@
     border-bottom: 2px solid black;
   }
   #closeEditModal,
-  #closeDeleteModal {
+  #closeDeleteModal,
+  #closeAddModal {
     font-size: 41px;
+    cursor: pointer;
   }
 
   #closeEditModal:hover,
-  #closeDeleteModal:hover {
+  #closeDeleteModal:hover,
+  #closeAddModal:hover {
     transform: scale(0.9);
-    cursor: pointer;
   }
   #closeEditModal:active,
-  #closeDeleteModal:hover {
+  #closeDeleteModal:hover,
+  #closeAddModal:hover {
     transform: scale(0.8);
   }
 
@@ -475,6 +492,7 @@
     border-radius: 15px;
     font-size: 16px;
     padding: 0 2%;
+    cursor: pointer;
   }
   .modal-footer button:active {
     transform: scale(0.9);

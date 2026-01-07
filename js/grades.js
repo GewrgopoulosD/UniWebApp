@@ -3,9 +3,10 @@ import { BurgerMenu } from "./global.js";
 BurgerMenu();
 
 document.addEventListener("DOMContentLoaded", () => {
-  const gradesContainer = document.querySelector(".gradesContainer"); //student grades
+  const gradesContainer = document.querySelector(".gradesContainer"); //general div
 
   if (gradesContainer && !gradesContainer.querySelector(".gradesList")) {
+    //gradelist have only the teachers so, if the check is right show for student id
     async function loadStudentGrades() {
       try {
         const res = await fetch(
@@ -14,15 +15,16 @@ document.addEventListener("DOMContentLoaded", () => {
         const data = await res.json();
 
         if (data.success && data.grades.length > 0) {
-          let rows = data.grades
-            .map(
-              (g) => `<tr>
-                        <td>${g.assignment_title}</td>
-                        <td>${g.title_course}</td>
-                        <td>${g.grade}</td>
-                      </tr>`
-            )
-            .join("");
+          let rows = "";
+
+          for (let i = 0; i < data.grades.length; i++) {
+            const g = data.grades[i];
+            rows += `<tr>
+                      <td>${g.assignment_title}</td>
+                      <td>${g.title_course}</td>
+                      <td>${g.grade}</td>
+                      </tr>`;
+          }
 
           gradesContainer.innerHTML = `
             <h3>My Grades</h3>
@@ -50,32 +52,32 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   //teacher grade
-  const gradesModal = document.getElementById("previewGradesModal");
-  const modalStudent = document.querySelector(".addNameHeader");
+  const gradesModal = document.getElementById("previewGradesModal"); // modal for students grades
+  const modalStudent = document.querySelector(".addNameHeader"); //header to add the name from db
   const gradesBody = gradesModal.querySelector(".modal-body");
-  const closeModalSpan = document.getElementById("closePreviewModal");
-  const closeModalBtn = document.getElementById("closePreviewBtn");
+  const closeModalSpan = document.getElementById("closePreviewModal"); //X btn
+  const closeModalBtn = document.getElementById("closePreviewBtn"); //close btn
 
-  const studentCards = document.querySelectorAll(".studentCard");
+  const studentCards = document.querySelectorAll(".studentCard"); // each of student
 
   function openGradesModal(userId, username) {
     modalStudent.textContent = `Grades for: ${username}`;
     gradesModal.classList.add("active");
-    gradesBody.innerHTML = "<p>Loading grades...</p>";
 
     fetch(`./Api/ApiGrades.php?action=bringGradesForStudent&user_id=${userId}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success && data.grades.length > 0) {
-          const rows = data.grades
-            .map(
-              (g) => `<tr>
-                        <td>${g.assignment_title}</td>
-                        <td>${g.title_course}</td>
-                        <td>${g.grade}</td>
-                      </tr>`
-            )
-            .join("");
+          let rows = "";
+
+          for (let i = 0; i < data.grades.length; i++) {
+            const g = data.grades[i];
+            rows += `<tr>
+                      <td>${g.assignment_title}</td>
+                      <td>${g.title_course}</td>
+                      <td>${g.grade}</td>
+                      </tr>`;
+          }
 
           gradesBody.innerHTML = `
             <table class="gradesTable">

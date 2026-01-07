@@ -27,7 +27,14 @@
     border-radius: 15px;
     font-size: 14px;
     padding: 0 2%;
+    cursor: pointer;
   }
+
+  .btn-edit,
+  .btn-delete {
+    cursor: pointer;
+  }
+
   #addTopicsBtn:active,
   .btn-edit:active,
   .btn-delete:active {
@@ -121,12 +128,12 @@
   #closeEditModal,
   #closeDeleteModal {
     font-size: 40px;
+    cursor: pointer;
   }
   #closeAddModal:hover,
   #closeEditModal:hover,
   #closeDeleteModal:hover {
     transform: scale(0.9);
-    cursor: pointer;
   }
   #closeAddModal:active,
   #closeEditModal:active,
@@ -168,6 +175,7 @@
     border-radius: 15px;
     font-size: 14px;
     padding: 0 2%;
+    cursor: pointer;
   }
   .modal-footer button:active {
     transform: scale(0.9);
@@ -197,6 +205,7 @@
     border-radius: 15px;
     font-size: 15px;
     padding: 0 2%;
+    cursor: pointer;
   }
   #addTopicsBtn:active,
   .btn-edit:active,
@@ -239,6 +248,7 @@
 
   .topicCardActions button {
     border-radius: 15px;
+    cursor: pointer;
   }
 
   .topicsList {
@@ -339,6 +349,7 @@
     border-radius: 15px;
     font-size: 15px;
     padding: 0 2%;
+    cursor: pointer;
   }
   .modal-footer button:active {
     transform: scale(0.9);
