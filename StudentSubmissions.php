@@ -60,8 +60,8 @@ ob_start();
         <div class="assignmentsList">
             <?php foreach ($assignments as $assignment): ?>
                 <div class="assignmentsCard" data-assignment-id="<?= $assignment['assignment_id']; ?>"
-                    data-title="<?= htmlspecialchars($assignment['assignment_title'], ENT_QUOTES); ?>"
-                    data-description="<?= htmlspecialchars($assignment['assignment_description'], ENT_QUOTES); ?>"
+                    data-title="<?= htmlspecialchars($assignment['assignment_title'], ENT_QUOTES); ?>" e
+                    data-description="<?= htmlspecialchars($assignment['assignment_description'] ?? '', ENT_QUOTES); ?>"
                     data-deadline="<?= $assignment['deadline']; ?>">
                     <h4 class="AssignmentTitle">
                         <?= htmlspecialchars($assignment['assignment_title']); ?>&nbsp;(<?= htmlspecialchars($assignment['title_course']); ?>)
